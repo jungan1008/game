@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "deny": [
+      "Edit(/design/**)",
+      "Edit(/assets/**)",
+      "Edit(/icon.svg)",
+      "Edit(/collab/drafts/gpt/**)",
+      "Edit(/collab/reviews/gpt/**)",
+      "Edit(/.codex/**)",
+      "Read(/**/.env)",
+      "Read(/**/.env.local)",
+      "Read(/**/.env.production)"
+    ]
+  }
+}

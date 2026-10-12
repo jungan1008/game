@@ -1,0 +1,8 @@
+# Godot 텍스트 리소스는 LF 로 통일 — Windows CRLF 가 섞이면 의미 없는 diff 가 생긴다
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.ogg binary
+*.wav binary
+*.ttf binary
+*.otf binary

@@ -1,0 +1,19 @@
+# Godot
+.godot/
+/export/
+/build/
+*.pck
+*.tmp
+
+# 시크릿 — 절대 커밋 금지 (AGENTS.md §6-4)
+.env
+.env.*
+!.env.example
+export_credentials.cfg
+
+# 서버 의존성
+server/node_modules/
+
+# OS
+Thumbs.db
+.DS_Store

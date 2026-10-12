@@ -1,0 +1,37 @@
+# 경로접두어<TAB>소유 에이전트(쉼표 구분, * = 누구나)
+# 가장 긴 접두어가 이긴다. 여기 없는 경로는 커밋할 수 없다 — 그레이존 차단.
+# 이 파일은 producer 만 고친다. AGENTS.md §3 표와 함께 고칠 것.
+AGENTS.md	producer
+CLAUDE.md	producer
+README.md	producer
+.gitignore	producer
+.gitattributes	producer
+.claude/	producer
+.codex/	producer
+tools/	producer
+templates/	producer
+briefs/	producer
+design/visual/	art-director
+design/audio/	art-director
+design/ui/	ui-designer
+assets/	art-director
+icon.svg	art-director
+collab/drafts/gpt/	story-gpt,art-director,ui-designer
+collab/reviews/gpt/	story-gpt,art-director,ui-designer
+collab/drafts/claude/	story-claude,game-architect,gameplay-dev,narrative-dev,backend-dev,qa
+collab/reviews/claude/	story-claude,game-architect,gameplay-dev,narrative-dev,backend-dev,qa
+collab/handoff/	*
+collab/decisions/	*
+story/canon/	story-gpt,story-claude
+docs/architecture/	game-architect
+docs/adr/	game-architect
+project.godot	gameplay-dev
+export_presets.cfg	gameplay-dev
+scenes/	gameplay-dev
+scripts/	gameplay-dev
+data/game/	gameplay-dev
+addons/	gameplay-dev
+data/narrative/	narrative-dev
+server/	backend-dev
+tests/	qa
+qa/	qa

@@ -1,0 +1,47 @@
+#!/bin/sh
+# 커밋 메시지 첫 줄의 [에이전트] 태그와 변경 파일의 소유자를 대조한다.
+# 소유 규칙의 단일 출처는 tools/ownership.tsv. 활성화: git config core.hooksPath tools/hooks
+
+msg_file="$1"
+first=$(head -n1 "$msg_file")
+
+# 머지 커밋은 각 커밋이 이미 검사를 통과했으므로 통과시킨다
+case "$first" in
+  Merge*) exit 0 ;;
+esac
+
+agent=$(printf '%s' "$first" | sed -n 's/^\[\([a-z-]*\)\].*/\1/p')
+if [ -z "$agent" ]; then
+  echo "✖ 커밋 메시지는 [에이전트명] 으로 시작해야 합니다. 예: [gameplay-dev] 플레이어 이동 구현"
+  exit 1
+fi
+
+map="tools/ownership.tsv"
+known=$(grep -v '^#' "$map" | cut -f2 | tr ',' '\n' | grep -v '^\*$' | sort -u)
+if ! printf '%s\n' "$known" | grep -qx "$agent"; then
+  echo "✖ 알 수 없는 에이전트: [$agent]"
+  echo "  사용 가능: $(printf '%s ' $known)"
+  exit 1
+fi
+
+# producer(사용자)는 모든 경로를 커밋할 수 있다
+[ "$agent" = "producer" ] && exit 0
+
+git -c core.quotepath=off diff --cached --name-only --diff-filter=ACMRD | awk -F'\t' -v agent="$agent" '
+  NR == FNR {
+    if ($0 ~ /^#/ || $0 == "") next
+    n++; pre[n] = $1; own[n] = $2; next
+  }
+  {
+    best = ""; bo = ""
+    for (i = 1; i <= n; i++) {
+      p = pre[i]
+      if (substr($0, 1, length(p)) == p && length(p) > length(best)) { best = p; bo = own[i] }
+    }
+    if (bo == "") { print "✖ 소유자 미지정(그레이존): " $0 " → producer 가 tools/ownership.tsv 에 먼저 등록"; bad = 1; next }
+    m = split(bo, arr, ","); ok = 0
+    for (j = 1; j <= m; j++) if (arr[j] == agent || arr[j] == "*") ok = 1
+    if (!ok) { print "✖ 영역 침범: " $0 " (소유: " bo ") — handoff 로 요청할 것"; bad = 1 }
+  }
+  END { exit bad }
+' "$map" -
