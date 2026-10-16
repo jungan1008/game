@@ -1,4 +1,6 @@
+<<<<<<< HEAD
 # game
+=======
 # Project Mask
 
 Godot 게임 프로젝트. 디자인은 GPT, 코딩은 Claude, 스토리는 둘 다 한다.
@@ -44,13 +46,4 @@ AI 는 스스로 커밋하지 않는다. 확인 후 "커밋해줘" 라고 하면
 ## 5. 사용자만 하는 일
 
 브리프 작성 · 경합 채택 · ADR 승인 · 플레이테스트 · 커밋 승인 · 서버 배포 · 시크릿(API 키) 등록
-
-## 6. 현재 프로젝트 메모
-
-이 저장소는 동물 보호·복원 구역을 배경으로 하는 게임 기획 프로젝트를 관리한다.
-현재 핵심 컨셉은 정원/농장 관리 게임이 아니라, 보호 구역을 복원하고 확장하는 생태 보호 게임이다.
-
-주요 문서:
-- [briefs/002-shelter-reborn.md](briefs/002-shelter-reborn.md)
-- [briefs/001-mask-chapter-one.md](briefs/001-mask-chapter-one.md)
-
+>>>>>>> a58bdfb ([producer] 프로젝트 초기 구성: 역할 9종·소유권 훅·Godot 기본 씬)
